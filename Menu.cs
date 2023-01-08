@@ -42,7 +42,12 @@ namespace TStore
         {
             try
             {
-                CurrentUser.ReplenishBalance(Double.Parse(amount.Text));
+                double amountParsed = Double.Parse(amount.Text);
+                if (amountParsed < 0)
+                {
+                    throw new Exception();
+                }
+                CurrentUser.ReplenishBalance(amountParsed);
                 balanceLabel.Text = CurrentUser.GetBalance().ToString();
             } catch (Exception)
             {
